@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=19 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://Scenes/Player/RocketFire.gdshader" id="3_h0uvm"]
 [ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Scenes/Player/reticle.png" id="5_yy6cx"]
 [ext_resource type="Script" path="res://Scenes/Player/HudRoot.gd" id="7_lvghx"]
+[ext_resource type="AudioStream" uid="uid://bm2lllnr8m680" path="res://loop.wav" id="8_8njq0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o723b"]
 size = Vector3(0.550015, 0.219379, 1.14555)
@@ -128,6 +129,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gkbay")
 max_value = 1.0
 value = 1.0
 show_percentage = false
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Bass" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("8_8njq0")
+autoplay = true
+bus = &"Music"
 
 [connection signal="health_changed" from="." to="HUDLayer/HudRoot" method="_on_player_root_health_changed"]
 [connection signal="timeout" from="ShootDelay" to="." method="_on_shoot_delay_timeout"]
