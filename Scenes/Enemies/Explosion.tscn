@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://cyoeilu4w4g3e" path="res://Scenes/Enemies/Kill.wav" id="1_cb444"]
 
 [sub_resource type="Curve" id="Curve_1h4f8"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.746753, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.24211, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.621053, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.24211, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_m5hxy"]
@@ -24,6 +24,11 @@ scale_curve = SubResource("CurveTexture_m5hxy")
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(0.662745, 0.584314, 0.0784314, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_e08jc"]
 material = SubResource("StandardMaterial3D_msiel")
@@ -31,6 +36,7 @@ material = SubResource("StandardMaterial3D_msiel")
 [node name="Node3D" type="GPUParticles3D"]
 emitting = false
 amount = 32
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_8bc3h")

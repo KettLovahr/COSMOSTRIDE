@@ -3,7 +3,7 @@ extends Area3D
 const SPEED = 20.0
 const JUMP_VELOCITY = 4.5
 
-var range: Vector2 = Vector2(3.5, 2.0)
+var range: Vector2 = Vector2(3.25, 1.75)
 
 var velocity: Vector2
 

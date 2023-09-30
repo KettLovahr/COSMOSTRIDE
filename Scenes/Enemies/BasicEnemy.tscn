@@ -5,9 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://duexvq4xpte8q" path="res://Scenes/Enemies/Explosion.tscn" id="2_ymt2p"]
 [ext_resource type="AudioStream" uid="uid://cjnfb2yg3icno" path="res://Scenes/Enemies/Hit.wav" id="3_rbeau"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_cm2l7"]
-height = 1.22565
-radius = 0.797199
+[sub_resource type="SphereShape3D" id="SphereShape3D_wco26"]
+radius = 1.0
 
 [sub_resource type="Animation" id="Animation_v307r"]
 resource_name = "Default"
@@ -52,7 +51,7 @@ script = ExtResource("1_cfng5")
 explosion_scene = ExtResource("2_ymt2p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_cm2l7")
+shape = SubResource("SphereShape3D_wco26")
 
 [node name="BasicEnemyModel" parent="." instance=ExtResource("2_es8rh")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)

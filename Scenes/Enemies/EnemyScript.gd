@@ -3,7 +3,7 @@ class_name Enemy
 
 @export var explosion_scene: PackedScene
 
-@export var hit_points: int = 5:
+@export var hit_points: int = 3:
 	set(v):
 		print(v)
 		$HitSound.play()

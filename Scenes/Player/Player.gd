@@ -23,14 +23,15 @@ func _ready():
 		$PlayerController/ModelPosition/PlayerModel/GunLeft,
 		$PlayerController/ModelPosition/PlayerModel/GunRight
 	]
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	world_cursor_pos = $PlayerCamera.project_position(get_viewport().get_mouse_position(), 100)
+	world_cursor_pos = $PlayerCamera.project_position(get_viewport().get_mouse_position(), 25)
 	var unprojected_cursor = $PlayerCamera.unproject_position(world_cursor_pos)
 	var unprojected_player = $PlayerCamera.unproject_position($PlayerController.global_position)
-	$ReticleInner.position = lerp(unprojected_cursor, unprojected_player, 0.02)
+	$ReticleInner.position = lerp(unprojected_cursor, unprojected_player, 0.00)
 	$ReticleOuter.position = lerp(unprojected_cursor, unprojected_player, 0.15)
 	
 	$PlayerController.look_at(world_cursor_pos)
