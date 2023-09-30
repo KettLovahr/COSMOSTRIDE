@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3qumpf4va2p"]
+[gd_scene load_steps=6 format=3 uid="uid://d3qumpf4va2p"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Bullet.gd" id="1_x4o28"]
 [ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Scenes/Player/Shoot.wav" id="2_e0x4r"]
@@ -14,7 +14,11 @@ height = 0.5
 radial_segments = 4
 rings = 1
 
-[node name="Bullet" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_120ja"]
+radius = 0.248965
+height = 1.16289
+
+[node name="Bullet" type="Area3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_x4o28")
 
@@ -30,7 +34,9 @@ autostart = true
 stream = ExtResource("2_e0x4r")
 autoplay = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(0, 1, 1, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_120ja")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

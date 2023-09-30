@@ -1,4 +1,4 @@
-extends Node3D
+extends Area3D
 
 const SPEED = 1.0
 
@@ -17,3 +17,8 @@ func _physics_process(delta):
 
 func _on_timer_timeout():
 	queue_free()
+
+
+func _on_body_entered(body):
+	if body is Enemy:
+		body.hit_points -= 1

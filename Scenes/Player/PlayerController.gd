@@ -1,8 +1,11 @@
-extends CharacterBody3D
+extends Area3D
 
 const SPEED = 20.0
 const JUMP_VELOCITY = 4.5
 
+var range: Vector2 = Vector2(3.5, 2.0)
+
+var velocity: Vector2
 
 
 var display_direction: Vector3 = Vector3.ZERO
@@ -22,7 +25,8 @@ func _physics_process(delta):
 	display_direction.z = lerp(display_direction.z, -(input_dir.x) * 30.0, 0.05)
 	display_direction.x = lerp(display_direction.x, (input_dir.y) * 30.0, 0.05)
 	
+	position += Vector3(velocity.x, velocity.y, 0) * delta
+	position = position.clamp(Vector3(-range.x, -range.y, 0), Vector3(range.x, range.y, 0))
+	
 	$ModelPosition.rotation_degrees.z = display_direction.z
 	$ModelPosition.rotation_degrees.x = display_direction.x
-
-	move_and_slide()

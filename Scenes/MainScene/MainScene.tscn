@@ -1,7 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://pkjf5vdfwqyi"]
+[gd_scene load_steps=12 format=3 uid="uid://pkjf5vdfwqyi"]
 
 [ext_resource type="PackedScene" uid="uid://54blxns7gun0" path="res://Scenes/Player/Player.tscn" id="1_b0qem"]
 [ext_resource type="Texture2D" uid="uid://cftwqfcjdii2u" path="res://Scenes/MainScene/space.png" id="2_spow3"]
+[ext_resource type="PackedScene" uid="uid://blf54rw528dxq" path="res://Scenes/Enemies/BasicEnemy.tscn" id="3_m0xwh"]
+
+[sub_resource type="Curve3D" id="Curve3D_cwgd7"]
+bake_interval = 250.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.263717, -0.155998, -1.79699, 0, 0, 0, 0, 0, 0, -30.1174, 1.11239, -53.9068, 0, 0, 0, 0, 0, 0, 25.1469, 12.2554, -81.7583, 0, 0, 0, 0, 0, 0, 70.2826, 14.0815, -88.8508, 0, 0, 0, 0, 0, 0, 150.446, 10.371, -82.4893, 0, 0, 0, 0, 0, 0, 304.085, 9.80591, 5.73956, 0, 0, 0, 0, 0, 0, 363.027, 27.1957, 102.965, 0, 0, 0, 0, 0, 0, 404.795, 50.1566, 258.374, 0, 0, 0, 0, 0, 0, 310.86, 49.6706, 339.16, 0, 0, 0, 0, 0, 0, 171.156, 63.9579, 327.234, 0, 0, 0, 0, 0, 0, -2.08268, 40.4857, 244.954, 0, 0, 0, 0, 0, 0, -10.8693, 27.6855, 151.278, 0, 0, 0, 0, 0, 0, -31.598, -8.46111, 53.705, 0, 0, 0, 0, 0, 0, -223.382, -0.314171, -97.8777, 0, 0, 0, 0, 0, 0, -490.615, 20.2089, -210.362, 0, 0, 0, 0, 0, 0, -375.609, 88.2609, -469.067),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 16
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t8gjm"]
 panorama = ExtResource("2_spow3")
@@ -15,9 +24,59 @@ sky = SubResource("Sky_1q2ii")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bbybn"]
 
+[sub_resource type="Animation" id="Animation_bfhwk"]
+resource_name = "Rail"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_0wyh5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g2e1"]
+_data = {
+"RESET": SubResource("Animation_0wyh5"),
+"Rail": SubResource("Animation_bfhwk")
+}
+
 [node name="MainScene" type="Node3D"]
 
-[node name="PlayerRoot" parent="." instance=ExtResource("1_b0qem")]
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_cwgd7")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.863892, 0.0105887, 0.503558, 0, 0.999771, -0.0210231, -0.503668, 0.0181617, 0.863703, 0.0721517, -0.148946, -2.11694)
+progress = 0.719849
+rotation_mode = 4
+loop = false
+tilt_enabled = false
+
+[node name="BasicEnemy" parent="Path3D/PathFollow3D" instance=ExtResource("3_m0xwh")]
+transform = Transform3D(0.801742, -1.49877e-08, -0.597677, 0.121231, 0.97922, 0.162623, 0.585252, -0.202837, 0.785074, -2.1377, -0.846579, -4.27735)
+
+[node name="PlayerRoot" parent="Path3D/PathFollow3D" instance=ExtResource("1_b0qem")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_phw2n")
@@ -31,3 +90,9 @@ light_energy = 5.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -7)
 light_color = Color(0.152941, 0.431373, 1, 1)
 light_energy = 5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Rail"
+libraries = {
+"": SubResource("AnimationLibrary_6g2e1")
+}
