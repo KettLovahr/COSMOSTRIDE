@@ -5,6 +5,17 @@ var world_cursor_pos: Vector3
 var can_shoot: bool = true
 var gun_delay: float = 0.25
 
+signal health_changed(cur_health: int, max_health: int)
+
+var max_health: int = 10:
+	set(v):
+		health_changed.emit(cur_health, v)
+		max_health = v
+var cur_health: int = 10:
+	set(v):
+		health_changed.emit(v, max_health)
+		cur_health = v
+
 var current_gun: int = 0
 var guns: Array[Node3D]:
 	get:
@@ -19,6 +30,7 @@ var guns: Array[Node3D]:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
 	guns = [
 		$PlayerController/ModelPosition/PlayerModel/GunLeft,
 		$PlayerController/ModelPosition/PlayerModel/GunRight

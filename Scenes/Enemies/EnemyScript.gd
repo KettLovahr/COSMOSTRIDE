@@ -23,5 +23,7 @@ func _on_kill():
 
 
 func _on_timer_timeout():
+	$Timer.start(randf() * 0.5 + 0.2)
 	var b = bullet_scene.instantiate()
 	add_child(b)
+	b.global_position = global_position

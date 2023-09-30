@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=18 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3qumpf4va2p" path="res://Scenes/Player/Bullet.tscn" id="2_uv341"]
 [ext_resource type="Shader" path="res://Scenes/Player/RocketFire.gdshader" id="3_h0uvm"]
 [ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Scenes/Player/reticle.png" id="5_yy6cx"]
+[ext_resource type="Script" path="res://Scenes/Player/HudRoot.gd" id="7_lvghx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o723b"]
 size = Vector3(0.550015, 0.219379, 1.14555)
@@ -37,6 +38,20 @@ shader = ExtResource("3_h0uvm")
 material = SubResource("ShaderMaterial_gx38f")
 radius = 0.2
 height = 0.4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nsulv"]
+bg_color = Color(0.639149, 0, 0.227996, 0.498039)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkbay"]
+bg_color = Color(0.345098, 0.694118, 0.294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 
 [node name="PlayerRoot" type="Node3D"]
 script = ExtResource("1_1syx5")
@@ -87,4 +102,32 @@ texture = ExtResource("5_yy6cx")
 [node name="ShootDelay" type="Timer" parent="."]
 wait_time = 0.6
 
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="HudRoot" type="Control" parent="HUDLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_lvghx")
+
+[node name="HealthBar" type="ProgressBar" parent="HUDLayer/HudRoot"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 270.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_nsulv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gkbay")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[connection signal="health_changed" from="." to="HUDLayer/HudRoot" method="_on_player_root_health_changed"]
 [connection signal="timeout" from="ShootDelay" to="." method="_on_shoot_delay_timeout"]
