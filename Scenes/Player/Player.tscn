@@ -42,7 +42,7 @@ height = 0.4
 script = ExtResource("1_1syx5")
 bullet_scene = ExtResource("2_uv341")
 
-[node name="PlayerController" type="Area3D" parent="."]
+[node name="PlayerController" type="Area3D" parent="." groups=["Player"]]
 collision_layer = 32768
 collision_mask = 32768
 script = ExtResource("1_8go8n")

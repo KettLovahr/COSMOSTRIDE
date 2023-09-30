@@ -2,10 +2,12 @@ extends CharacterBody3D
 class_name Enemy
 
 @export var explosion_scene: PackedScene
+@export var bullet_scene: PackedScene
+signal hit
 
 @export var hit_points: int = 3:
 	set(v):
-		print(v)
+		hit.emit()
 		$HitSound.play()
 		hit_points = v
 		if hit_points == 0:
@@ -18,3 +20,8 @@ func _on_kill():
 	ex.global_position = global_position
 	ex.emitting = true
 	queue_free()
+
+
+func _on_timer_timeout():
+	var b = bullet_scene.instantiate()
+	add_child(b)

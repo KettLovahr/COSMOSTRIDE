@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3qumpf4va2p"]
+[gd_scene load_steps=6 format=3 uid="uid://cmxdhaqmhqmhy"]
 
-[ext_resource type="Script" path="res://Scenes/Player/Bullet.gd" id="1_x4o28"]
-[ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Scenes/Player/Shoot.wav" id="2_e0x4r"]
+[ext_resource type="Script" path="res://Scenes/Enemies/EnemyBullet.gd" id="1_1or11"]
+[ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Scenes/Player/Shoot.wav" id="2_1hnmd"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e1ka"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8crov"]
 shading_mode = 0
-albedo_color = Color(0, 1, 1, 1)
+albedo_color = Color(0.968627, 0, 0.239216, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fpqa3"]
-material = SubResource("StandardMaterial3D_3e1ka")
+material = SubResource("StandardMaterial3D_8crov")
 radius = 0.05
 height = 0.5
 radial_segments = 4
@@ -20,7 +20,7 @@ height = 1.16289
 
 [node name="Bullet" type="Area3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-script = ExtResource("1_x4o28")
+script = ExtResource("1_1or11")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -30,13 +30,12 @@ mesh = SubResource("CapsuleMesh_fpqa3")
 autostart = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_e0x4r")
+stream = ExtResource("2_1hnmd")
 autoplay = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_120ja")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_timer_timeout"]

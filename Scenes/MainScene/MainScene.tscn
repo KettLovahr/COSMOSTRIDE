@@ -23,6 +23,7 @@ background_mode = 2
 sky = SubResource("Sky_1q2ii")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+fog_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bbybn"]
 
@@ -69,8 +70,7 @@ _data = {
 curve = SubResource("Curve3D_cwgd7")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.863892, 0.0105887, 0.503557, 0, 0.999771, -0.0210231, -0.503667, 0.0181617, 0.863703, 0.0721515, -0.148946, -2.11694)
-progress = 0.719849
+transform = Transform3D(0.863892, 0.0105887, 0.503557, 0, 0.999771, -0.0210231, -0.503667, 0.0181617, 0.863703, 0.263717, -0.155998, -1.79699)
 rotation_mode = 4
 loop = false
 tilt_enabled = false

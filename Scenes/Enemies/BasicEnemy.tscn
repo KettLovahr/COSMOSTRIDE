@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://blf54rw528dxq"]
+[gd_scene load_steps=10 format=3 uid="uid://blf54rw528dxq"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyScript.gd" id="1_cfng5"]
 [ext_resource type="PackedScene" uid="uid://cwdgdguu0od85" path="res://Scenes/Enemies/BasicEnemyModel.glb" id="2_es8rh"]
 [ext_resource type="PackedScene" uid="uid://duexvq4xpte8q" path="res://Scenes/Enemies/Explosion.tscn" id="2_ymt2p"]
+[ext_resource type="PackedScene" uid="uid://cmxdhaqmhqmhy" path="res://Scenes/Enemies/EnemyBullet.tscn" id="3_ja48k"]
 [ext_resource type="AudioStream" uid="uid://cjnfb2yg3icno" path="res://Scenes/Enemies/Hit.wav" id="3_rbeau"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wco26"]
@@ -49,6 +50,7 @@ _data = {
 [node name="BasicEnemy" type="CharacterBody3D"]
 script = ExtResource("1_cfng5")
 explosion_scene = ExtResource("2_ymt2p")
+bullet_scene = ExtResource("3_ja48k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_wco26")
@@ -64,3 +66,9 @@ libraries = {
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_rbeau")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
