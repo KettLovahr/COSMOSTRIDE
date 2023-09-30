@@ -13,7 +13,6 @@ var travel_delta: float = 0.0
 func _ready():
 	player = get_tree().get_nodes_in_group("Player")[0]
 	reparent(player.get_parent(), true)
-	print(position)
 	origin = position
 	target = player.position
 	look_at(to_global(target))
