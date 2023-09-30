@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://54blxns7gun0"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
+[ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
+[ext_resource type="Script" path="res://Scenes/Player/PlayerController.gd" id="1_8go8n"]
+[ext_resource type="PackedScene" uid="uid://d3qumpf4va2p" path="res://Scenes/Player/Bullet.tscn" id="2_uv341"]
+[ext_resource type="Shader" path="res://Scenes/Player/RocketFire.gdshader" id="3_h0uvm"]
+[ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Scenes/Player/reticle.png" id="5_yy6cx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o723b"]
+size = Vector3(0.550015, 0.219379, 1.14555)
+
+[sub_resource type="Gradient" id="Gradient_ssd66"]
+offsets = PackedFloat32Array(0, 0.723577, 1)
+colors = PackedColorArray(1, 1, 1, 0.298039, 0, 0.596078, 0.517647, 0.278431, 0, 0.717647, 0.635294, 0.439216)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ce3ck"]
+gradient = SubResource("Gradient_ssd66")
+
+[sub_resource type="Curve" id="Curve_7kkw6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.578947), -1.65284, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_224le"]
+curve = SubResource("Curve_7kkw6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_31ixn"]
+gravity = Vector3(0, 0, 0.6)
+scale_curve = SubResource("CurveTexture_224le")
+color_ramp = SubResource("GradientTexture1D_ce3ck")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx38f"]
+render_priority = 0
+shader = ExtResource("3_h0uvm")
+
+[sub_resource type="SphereMesh" id="SphereMesh_vjw5r"]
+material = SubResource("ShaderMaterial_gx38f")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h0v0f"]
+size = Vector3(0.2, 5, 1)
+
+[node name="PlayerRoot" type="Node3D"]
+script = ExtResource("1_1syx5")
+bullet_scene = ExtResource("2_uv341")
+
+[node name="PlayerController" type="CharacterBody3D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+axis_lock_linear_z = true
+script = ExtResource("1_8go8n")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="PlayerController"]
+shape = SubResource("BoxShape3D_o723b")
+
+[node name="ModelPosition" type="Node3D" parent="PlayerController"]
+
+[node name="PlayerModel" parent="PlayerController/ModelPosition" instance=ExtResource("1_5jc7j")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0, -0.25)
+
+[node name="GunLeft" type="Node3D" parent="PlayerController/ModelPosition/PlayerModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 1.602)
+
+[node name="GunRight" type="Node3D" parent="PlayerController/ModelPosition/PlayerModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 0, 1.602)
+
+[node name="Trail" type="GPUParticles3D" parent="PlayerController/ModelPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10543e-15, -0.0593828, 0.445589)
+amount = 128
+local_coords = true
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_31ixn")
+draw_pass_1 = SubResource("SphereMesh_vjw5r")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+current = true
+
+[node name="ReticleOuter" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_yy6cx")
+
+[node name="ReticleInner" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.752941)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_yy6cx")
+
+[node name="ShootDelay" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="PlayerBounds" type="StaticBody3D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="LeftBound" type="CollisionShape3D" parent="PlayerBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+shape = SubResource("BoxShape3D_h0v0f")
+
+[node name="RightBound" type="CollisionShape3D" parent="PlayerBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+shape = SubResource("BoxShape3D_h0v0f")
+
+[node name="UpperBound" type="CollisionShape3D" parent="PlayerBounds"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_h0v0f")
+
+[node name="LowerBound" type="CollisionShape3D" parent="PlayerBounds"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_h0v0f")
+
+[connection signal="timeout" from="ShootDelay" to="." method="_on_shoot_delay_timeout"]

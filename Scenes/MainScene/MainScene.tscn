@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://pkjf5vdfwqyi"]
+
+[ext_resource type="PackedScene" uid="uid://54blxns7gun0" path="res://Scenes/Player/Player.tscn" id="1_b0qem"]
+[ext_resource type="Texture2D" uid="uid://cftwqfcjdii2u" path="res://Scenes/MainScene/space.png" id="2_spow3"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t8gjm"]
+panorama = ExtResource("2_spow3")
+
+[sub_resource type="Sky" id="Sky_1q2ii"]
+sky_material = SubResource("PanoramaSkyMaterial_t8gjm")
+
+[sub_resource type="Environment" id="Environment_phw2n"]
+background_mode = 2
+sky = SubResource("Sky_1q2ii")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bbybn"]
+
+[node name="MainScene" type="Node3D"]
+
+[node name="PlayerRoot" parent="." instance=ExtResource("1_b0qem")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_phw2n")
+camera_attributes = SubResource("CameraAttributesPractical_bbybn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.862319, -0.419301, 0.283888, 0, 0.560639, 0.82806, -0.506365, -0.714052, 0.48345, 0, 2.2229, 2.23156)
+light_energy = 5.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -7)
+light_color = Color(0.152941, 0.431373, 1, 1)
+light_energy = 5.0
