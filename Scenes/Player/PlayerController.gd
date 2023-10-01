@@ -1,6 +1,6 @@
 extends Area3D
 
-const SPEED = 20.0
+var speed = 10.0
 const JUMP_VELOCITY = 4.5
 
 var range: Vector2 = Vector2(3.25, 1.75)
@@ -19,10 +19,10 @@ func _physics_process(delta):
 	else:
 		input_dir = Vector2.ZERO
 	if input_dir:
-		velocity.x += input_dir.x * SPEED * delta
-		velocity.y += input_dir.y * SPEED * delta
-		velocity.x = clamp(velocity.x, -SPEED, SPEED)
-		velocity.y = clamp(velocity.y, -SPEED, SPEED)
+		velocity.x += input_dir.x * speed * delta
+		velocity.y += input_dir.y * speed * delta
+		velocity.x = clamp(velocity.x, -speed, speed)
+		velocity.y = clamp(velocity.y, -speed, speed)
 
 	velocity.x = lerp(velocity.x, 0.0, 0.05)
 	velocity.y = lerp(velocity.y, 0.0, 0.05)

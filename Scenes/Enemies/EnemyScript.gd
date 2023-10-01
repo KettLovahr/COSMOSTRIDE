@@ -5,12 +5,13 @@ class_name Enemy
 @export var bullet_scene: PackedScene
 signal hit(kill: bool, score: int)
 
-var value: int = 3
+@export var value: int = 3
 
 @export var hit_points: int = 3:
 	set(v):
 		hit.emit(v == 0, value)
-		$HitSound.play()
+		if is_inside_tree():
+			$HitSound.play()
 		hit_points = v
 		if hit_points == 0:
 			_on_kill()

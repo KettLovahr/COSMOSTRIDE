@@ -434,17 +434,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
+[node name="Icon1" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
 position = Vector2(-60, -45)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_aw3yo")
 
-[node name="Sprite2D2" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
+[node name="Icon2" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
 position = Vector2(0, -45)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_aw3yo")
 
-[node name="Sprite2D3" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
+[node name="Icon3" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
 position = Vector2(60, -45)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_aw3yo")

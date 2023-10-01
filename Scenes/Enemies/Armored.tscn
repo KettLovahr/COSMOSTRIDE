@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://tin31st2k4ul"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/EnemyScript.gd" id="1_g51sv"]
+[ext_resource type="PackedScene" uid="uid://duexvq4xpte8q" path="res://Scenes/Enemies/Explosion.tscn" id="2_55c21"]
+[ext_resource type="PackedScene" uid="uid://cmxdhaqmhqmhy" path="res://Scenes/Enemies/EnemyBullet.tscn" id="3_d56or"]
+[ext_resource type="PackedScene" uid="uid://2f6mq226sss6" path="res://Assets/Armored.glb" id="4_hmjq7"]
+[ext_resource type="AudioStream" uid="uid://cjnfb2yg3icno" path="res://Assets/Hit.wav" id="6_8xw51"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wco26"]
+radius = 1.80587
+
+[sub_resource type="Animation" id="Animation_v307r"]
+resource_name = "Default"
+length = 3.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_pgckk"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6y6d2"]
+_data = {
+"Default": SubResource("Animation_v307r"),
+"RESET": SubResource("Animation_pgckk")
+}
+
+[node name="BasicEnemy" type="CharacterBody3D"]
+script = ExtResource("1_g51sv")
+explosion_scene = ExtResource("2_55c21")
+bullet_scene = ExtResource("3_d56or")
+value = 10
+hit_points = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wco26")
+
+[node name="Armored" parent="." instance=ExtResource("4_hmjq7")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Default"
+libraries = {
+"": SubResource("AnimationLibrary_6y6d2")
+}
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_8xw51")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

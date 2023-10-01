@@ -1,7 +1,7 @@
 extends Node
 
 var total_score: int
-var collected_modules: Array[Module]
+var collected_modules: Array[Dictionary]
 var level: int
 
 var main_menu: String = "res://Scenes/MainMenu/MainMenu.tscn"

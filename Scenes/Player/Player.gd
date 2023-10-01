@@ -4,10 +4,25 @@ var world_cursor_pos: Vector3
 
 var can_shoot: bool = true
 var gun_delay: float = 0.25
+var gun_damage: int = 1
+var twin_fire: bool = false
+
+var barrel_roll: bool = false
+var barrel_roll_delay: float = 10.0
+
+var regen: bool = false
+var regen_timer: float = 20.0
+
+var modules: Array[Dictionary]
+# Modules to be formatted as such:
+# {
+#   "type": "module_type"
+#   "level": num
+# }
 
 var alive: bool = true
 
-var modules: Array[Module] = []
+var levels: Array[int] = [0,0,0,0,0,0,0]
 
 var score: int = 0:
 	set(v):
@@ -53,6 +68,15 @@ func _ready():
 	]
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
+	modules = [
+		{"type": "TWIN_FIRE", "level": 1},
+		{"type": "SHOT_SPEED", "level": 1},
+		{"type": "SHIELD", "level": 3},
+	]
+
+	_apply_module_effects()
+	_draw_module_sprites()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -65,15 +89,9 @@ func _process(delta):
 	if alive:
 		$PlayerController.look_at(world_cursor_pos)
 		if Input.is_action_pressed("move_shoot") and can_shoot:
-			var b: Bullet = bullet_scene.instantiate()
-			#b.top_level = true
-			b.target = to_local(world_cursor_pos)
-			add_child(b)
-			b.global_position = self.guns[current_gun].global_position
-			b.global_rotation = $PlayerController.global_rotation
-			b.hit.connect(_on_bullet_hit)
-			can_shoot = false
-			$ShootDelay.start(gun_delay)
+			_shoot()
+			if twin_fire:
+				_shoot()
 		
 
 func _on_bullet_hit(kill, score):
@@ -86,6 +104,17 @@ func _on_shoot_delay_timeout():
 func _update_score():
 	$HUDLayer/HudRoot/ScoreLabel.text = "%03d" % (score)
 	$HUDLayer/HudRoot/TotalScoreLabel.text = "%06d" % (GameState.total_score + score)
+	
+func _shoot():
+	var b: Bullet = bullet_scene.instantiate()
+	#b.top_level = true
+	b.target = to_local(world_cursor_pos)
+	add_child(b)
+	b.global_position = self.guns[current_gun].global_position
+	b.global_rotation = $PlayerController.global_rotation
+	b.hit.connect(_on_bullet_hit)
+	can_shoot = false
+	$ShootDelay.start(gun_delay)
 	
 func _die():
 	alive = false
@@ -100,3 +129,65 @@ func _die():
 	
 func _end_game():
 	get_tree().change_scene_to_file("res://Scenes/GameOver/GameOver.tscn")
+
+func _apply_module_effects():
+	for module in modules:
+		match module.type:
+			"SHIELD":
+				self.max_health += module.level * 3
+				self.cur_health += module.level * 3
+			"SPEED":
+				$PlayerController.speed += module.level
+			"BARREL_ROLL":
+				barrel_roll = true
+				match module.level:
+					1: barrel_roll_delay /= 2.0
+					2: barrel_roll_delay /= 2.5
+					3: barrel_roll_delay /= 4.0
+			"SHOT_SPEED":
+				match module.level:
+					1: gun_delay -= 0.03
+					2: gun_delay -= 0.05
+					3: gun_delay -= 0.07
+			"SHOT_DAMAGE":
+				match module.level:
+					1: 
+						gun_delay += 0.01
+						gun_damage += 1
+					2: 
+						gun_delay += 0.02
+						gun_damage += 2
+					3: 
+						gun_delay += 0.03
+						gun_damage += 4
+					
+			"TWIN_FIRE":
+				twin_fire = true
+			"REGEN":
+				regen = true
+				match module.level:
+					1: regen_timer /= 2.0
+					2: regen_timer /= 3.0
+					3: regen_timer /= 4.0
+
+func _draw_module_sprites():
+	var cursor = 1
+	for module in modules:
+		var sprite: Sprite2D = get_node("HUDLayer/HudRoot/ModuleDisplay/Icon%d" % cursor)
+		match module.type:
+			"SHIELD":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_shield.png")
+			"SPEED":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_speed.png")
+			"BARREL_ROLL":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_barrel_roll.png")
+			"SHOT_SPEED":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_shot_speed.png")
+			"SHOT_DAMAGE":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_shot_damage.png")
+			"TWIN_FIRE":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_twin_fire.png")
+			"REGEN":
+				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_regen.png")
+		cursor += 1
+
