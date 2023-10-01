@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://blf54rw528dxq"]
+[gd_scene load_steps=11 format=3 uid="uid://bq5g150ubt1ga"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyScript.gd" id="1_cfng5"]
-[ext_resource type="PackedScene" uid="uid://cwdgdguu0od85" path="res://Scenes/Enemies/BasicEnemyModel.glb" id="2_es8rh"]
 [ext_resource type="PackedScene" uid="uid://duexvq4xpte8q" path="res://Scenes/Enemies/Explosion.tscn" id="2_ymt2p"]
 [ext_resource type="PackedScene" uid="uid://cmxdhaqmhqmhy" path="res://Scenes/Enemies/EnemyBullet.tscn" id="3_ja48k"]
+[ext_resource type="PackedScene" uid="uid://de5ssroly4eay" path="res://Assets/Enemy.glb" id="4_uorvw"]
+[ext_resource type="PackedScene" uid="uid://cwdgdguu0od85" path="res://Assets/BasicEnemyModel.glb" id="5_iiptf"]
 [ext_resource type="AudioStream" uid="uid://cjnfb2yg3icno" path="res://Assets/Hit.wav" id="5_oytor"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wco26"]
@@ -55,8 +56,12 @@ bullet_scene = ExtResource("3_ja48k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_wco26")
 
-[node name="BasicEnemyModel" parent="." instance=ExtResource("2_es8rh")]
+[node name="Enemy" parent="." instance=ExtResource("4_uorvw")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+
+[node name="BasicEnemyModel" parent="." instance=ExtResource("5_iiptf")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Default"

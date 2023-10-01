@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://sjqvc8hxvso"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemySpawner.gd" id="1_6i7yf"]
-[ext_resource type="PackedScene" uid="uid://blf54rw528dxq" path="res://Scenes/Enemies/BasicEnemy.tscn" id="2_mrhht"]
+[ext_resource type="PackedScene" uid="uid://bq5g150ubt1ga" path="res://Scenes/Enemies/BasicEnemy.tscn" id="2_mrhht"]
 
 [sub_resource type="Curve3D" id="Curve3D_skfc4"]
 bake_interval = 50.0

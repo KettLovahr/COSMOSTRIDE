@@ -29,4 +29,4 @@ func spawn_enemy():
 	var tween = get_tree().create_tween()
 	new_follow.progress_ratio = round(randf())
 	tween.tween_property(new_follow, "progress_ratio", 1.0 - new_follow.progress_ratio, 12.0)
-	tween.tween_callback(new_follow.queue_free)
+	tween.tween_callback(func(): if new_follow != null: new_follow.queue_free())

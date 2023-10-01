@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=32 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://bm2lllnr8m680" path="res://Assets/loop.wav" id="8_l6321"]
 [ext_resource type="FontFile" uid="uid://cjlgevbwecirh" path="res://Assets/Audiowide-Regular.ttf" id="8_svgew"]
 [ext_resource type="Texture2D" uid="uid://b16e7wqkj4lry" path="res://Scenes/Player/ModuleIcons/module_empty.png" id="9_aw3yo"]
+[ext_resource type="AudioStream" uid="uid://dpijwbpowdui6" path="res://Assets/Death.wav" id="11_8erf6"]
+[ext_resource type="AudioStream" uid="uid://duknvijl8xpq8" path="res://Assets/PlayerHit.wav" id="12_pt4cs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o723b"]
 size = Vector3(0.550015, 0.219379, 1.14555)
@@ -42,31 +44,103 @@ material = SubResource("ShaderMaterial_gx38f")
 radius = 0.2
 height = 0.4
 
-[sub_resource type="Animation" id="Animation_lcn3t"]
-resource_name = "OnHit"
+[sub_resource type="Animation" id="Animation_wpdlw"]
+resource_name = "OnDeath"
+length = 8.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
+tracks/0/path = NodePath("PlayerModel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 0, 0, 0.498039), Color(0.47451, 0, 0, 0)]
+"values": [Vector3(0, 0, -0.25), Vector3(0, -5, -10), Vector3(0, -10, -50)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
+tracks/1/path = NodePath("PlayerModel:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.8, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0), Vector3(0.174533, -3.14159, 6.28319), Vector3(0.523599, -3.14159, 12.5664), Vector3(1.0472, -3.14159, 18.8496), Vector3(1.5708, -3.14159, 62.8319)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_game"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_oe3ys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerModel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerModel:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hwyii"]
+_data = {
+"OnDeath": SubResource("Animation_wpdlw"),
+"RESET": SubResource("Animation_oe3ys")
 }
 
 [sub_resource type="Animation" id="Animation_tim51"]
@@ -96,6 +170,33 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_lcn3t"]
+resource_name = "OnHit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.498039), Color(0.47451, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_opd6x"]
 _data = {
 "OnHit": SubResource("Animation_lcn3t"),
@@ -116,6 +217,67 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 
+[sub_resource type="Animation" id="Animation_w4rhg"]
+resource_name = "OnDeath"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_c7845"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_alebc"]
+_data = {
+"OnDeath": SubResource("Animation_w4rhg"),
+"RESET": SubResource("Animation_c7845")
+}
+
 [node name="PlayerRoot" type="Node3D"]
 script = ExtResource("1_1syx5")
 bullet_scene = ExtResource("2_uv341")
@@ -131,7 +293,7 @@ shape = SubResource("BoxShape3D_o723b")
 [node name="ModelPosition" type="Node3D" parent="PlayerController"]
 
 [node name="PlayerModel" parent="PlayerController/ModelPosition" instance=ExtResource("1_5jc7j")]
-transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0, -0.25)
+transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, 0, 0, -0.25)
 
 [node name="GunLeft" type="Node3D" parent="PlayerController/ModelPosition/PlayerModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 1.602)
@@ -146,6 +308,11 @@ local_coords = true
 draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_31ixn")
 draw_pass_1 = SubResource("SphereMesh_vjw5r")
+
+[node name="DeathAnim" type="AnimationPlayer" parent="PlayerController/ModelPosition"]
+libraries = {
+"": SubResource("AnimationLibrary_hwyii")
+}
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
@@ -282,6 +449,21 @@ position = Vector2(60, -45)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_aw3yo")
 
+[node name="DeathOverlay" type="ColorRect" parent="HUDLayer/HudRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="DeathAnim" type="AnimationPlayer" parent="HUDLayer/HudRoot/DeathOverlay"]
+libraries = {
+"": SubResource("AnimationLibrary_alebc")
+}
+
 [node name="RestartPanel" type="Panel" parent="HUDLayer/HudRoot"]
 visible = false
 layout_mode = 1
@@ -344,9 +526,17 @@ text = "No"
 
 [node name="Music" type="Node" parent="."]
 
-[node name="Bass" type="AudioStreamPlayer" parent="Music"]
+[node name="Loop" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("8_l6321")
 autoplay = true
+bus = &"Music"
+
+[node name="Death" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("11_8erf6")
+bus = &"Music"
+
+[node name="Damage" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("12_pt4cs")
 bus = &"Music"
 
 [connection signal="health_changed" from="." to="HUDLayer/HudRoot" method="_on_player_root_health_changed"]
