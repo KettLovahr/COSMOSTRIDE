@@ -22,7 +22,7 @@ func spawn_enemy():
 	var new_enemy: Enemy = enemies[which_enemy].instantiate()
 	patterns[which_pattern].add_child(new_follow)
 	new_follow.add_child(new_enemy)
-	new_enemy.position += Vector3(randf(), randf() * 3.0, randf())
+	new_enemy.position += Vector3(randf(), randf() * 3.0, randf()) * randf_range(-1, 1)
 	
 	new_follow.rotation_mode= PathFollow3D.ROTATION_ORIENTED
 		

@@ -15,7 +15,6 @@ func _ready():
 	reparent(player.get_parent(), true)
 	origin = position
 	target = player.position
-	look_at(to_global(target))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

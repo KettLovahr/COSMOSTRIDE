@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=24 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/Player/HudRoot.gd" id="7_lvghx"]
 [ext_resource type="AudioStream" uid="uid://bm2lllnr8m680" path="res://Assets/loop.wav" id="8_l6321"]
 [ext_resource type="FontFile" uid="uid://cjlgevbwecirh" path="res://Assets/Audiowide-Regular.ttf" id="8_svgew"]
+[ext_resource type="Texture2D" uid="uid://b16e7wqkj4lry" path="res://Scenes/Player/ModuleIcons/module_empty.png" id="9_aw3yo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o723b"]
 size = Vector3(0.550015, 0.219379, 1.14555)
@@ -40,6 +41,66 @@ shader = ExtResource("3_h0uvm")
 material = SubResource("ShaderMaterial_gx38f")
 radius = 0.2
 height = 0.4
+
+[sub_resource type="Animation" id="Animation_lcn3t"]
+resource_name = "OnHit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.498039), Color(0.47451, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_tim51"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.498039)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_opd6x"]
+_data = {
+"OnHit": SubResource("Animation_lcn3t"),
+"RESET": SubResource("Animation_tim51")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nsulv"]
 bg_color = Color(0.639149, 0, 0.227996, 0.498039)
@@ -115,6 +176,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_lvghx")
 
+[node name="DamageOverlay" type="ColorRect" parent="HUDLayer/HudRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.498039)
+
+[node name="DamageAnim" type="AnimationPlayer" parent="HUDLayer/HudRoot/DamageOverlay"]
+libraries = {
+"": SubResource("AnimationLibrary_opd6x")
+}
+
 [node name="HealthBar" type="ProgressBar" parent="HUDLayer/HudRoot"]
 layout_mode = 1
 anchors_preset = 2
@@ -145,6 +221,127 @@ theme_override_fonts/font = ExtResource("8_svgew")
 theme_override_font_sizes/font_size = 48
 text = "000"
 
+[node name="TotalScoreLabel" type="Label" parent="HUDLayer/HudRoot"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -54.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("8_svgew")
+theme_override_font_sizes/font_size = 24
+text = "000000"
+horizontal_alignment = 2
+
+[node name="LevelLabel" type="Label" parent="HUDLayer/HudRoot"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -74.0
+offset_right = -20.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("8_svgew")
+theme_override_font_sizes/font_size = 24
+text = "Lv. 0"
+horizontal_alignment = 2
+
+[node name="ModuleDisplay" type="Control" parent="HUDLayer/HudRoot"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
+position = Vector2(-60, -45)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_aw3yo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
+position = Vector2(0, -45)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_aw3yo")
+
+[node name="Sprite2D3" type="Sprite2D" parent="HUDLayer/HudRoot/ModuleDisplay"]
+position = Vector2(60, -45)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_aw3yo")
+
+[node name="RestartPanel" type="Panel" parent="HUDLayer/HudRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -81.0
+offset_right = 196.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartLabel" type="Label" parent="HUDLayer/HudRoot/RestartPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -30.0
+offset_right = 56.5
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart Game?"
+
+[node name="RestartYes" type="Button" parent="HUDLayer/HudRoot/RestartPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = 27.0
+offset_right = -19.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Yes"
+
+[node name="RestartNo" type="Button" parent="HUDLayer/HudRoot/RestartPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 27.5
+offset_right = 71.0
+offset_bottom = 58.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No"
+
 [node name="Music" type="Node" parent="."]
 
 [node name="Bass" type="AudioStreamPlayer" parent="Music"]
@@ -154,3 +351,6 @@ bus = &"Music"
 
 [connection signal="health_changed" from="." to="HUDLayer/HudRoot" method="_on_player_root_health_changed"]
 [connection signal="timeout" from="ShootDelay" to="." method="_on_shoot_delay_timeout"]
+[connection signal="visibility_changed" from="HUDLayer/HudRoot/RestartPanel" to="HUDLayer/HudRoot" method="_on_restart_panel_visibility_changed"]
+[connection signal="pressed" from="HUDLayer/HudRoot/RestartPanel/RestartYes" to="HUDLayer/HudRoot" method="_on_restart_yes_pressed"]
+[connection signal="pressed" from="HUDLayer/HudRoot/RestartPanel/RestartNo" to="HUDLayer/HudRoot" method="_on_restart_no_pressed"]

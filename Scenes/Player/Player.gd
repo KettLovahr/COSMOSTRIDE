@@ -5,10 +5,12 @@ var world_cursor_pos: Vector3
 var can_shoot: bool = true
 var gun_delay: float = 0.25
 
+var modules: Array[Module] = []
+
 var score: int = 0:
 	set(v):
 		score = v
-		$HUDLayer/HudRoot/ScoreLabel.text = "%03d" % (score)
+		_update_score()
 
 signal health_changed(cur_health: int, max_health: int)
 
@@ -19,6 +21,8 @@ var max_health: int = 10:
 var cur_health: int = 10:
 	set(v):
 		health_changed.emit(v, max_health)
+		if v < cur_health:
+			$HUDLayer/HudRoot/DamageOverlay/DamageAnim.play("OnHit")
 		cur_health = v
 
 var current_gun: int = 0
@@ -70,3 +74,7 @@ func _on_bullet_hit(kill, score):
 
 func _on_shoot_delay_timeout():
 	can_shoot = true
+
+func _update_score():
+	$HUDLayer/HudRoot/ScoreLabel.text = "%03d" % (score)
+	$HUDLayer/HudRoot/TotalScoreLabel.text = "%06d" % (GameState.total_score + score)

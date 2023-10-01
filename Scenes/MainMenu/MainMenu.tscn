@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://t7ppl5yc3po7"]
+
+[ext_resource type="Theme" uid="uid://dl6ray4fvnlcu" path="res://Scenes/Theme.tres" id="1_dk8ad"]
+[ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.gd" id="2_3fn10"]
+[ext_resource type="PackedScene" uid="uid://pkjf5vdfwqyi" path="res://Scenes/MainScene/MainScene.tscn" id="3_qmyg7"]
+[ext_resource type="Shader" uid="uid://ccbfldt1vho2r" path="res://Scenes/MainMenu/MainMenuBGShader.tres" id="4_cipgb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slppe"]
+shader = ExtResource("4_cipgb")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hh06g"]
+bg_color = Color(0, 0, 0, 0.752941)
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dk8ad")
+script = ExtResource("2_3fn10")
+first_level = ExtResource("3_qmyg7")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_slppe")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -172.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hh06g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 113.0
+offset_right = 20.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGameButton" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Start"
+
+[connection signal="pressed" from="Panel/HBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
