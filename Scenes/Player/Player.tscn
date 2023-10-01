@@ -1,13 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=20 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
 [ext_resource type="Script" path="res://Scenes/Player/PlayerController.gd" id="1_8go8n"]
 [ext_resource type="PackedScene" uid="uid://d3qumpf4va2p" path="res://Scenes/Player/Bullet.tscn" id="2_uv341"]
 [ext_resource type="Shader" path="res://Scenes/Player/RocketFire.gdshader" id="3_h0uvm"]
-[ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Scenes/Player/reticle.png" id="5_yy6cx"]
+[ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Assets/reticle.png" id="6_g2yg7"]
 [ext_resource type="Script" path="res://Scenes/Player/HudRoot.gd" id="7_lvghx"]
-[ext_resource type="AudioStream" uid="uid://bm2lllnr8m680" path="res://loop.wav" id="8_8njq0"]
+[ext_resource type="AudioStream" uid="uid://bm2lllnr8m680" path="res://Assets/loop.wav" id="8_l6321"]
+[ext_resource type="FontFile" uid="uid://cjlgevbwecirh" path="res://Assets/Audiowide-Regular.ttf" id="8_svgew"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o723b"]
 size = Vector3(0.550015, 0.219379, 1.14555)
@@ -93,12 +94,12 @@ fov = 65.0
 [node name="ReticleOuter" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("5_yy6cx")
+texture = ExtResource("6_g2yg7")
 
 [node name="ReticleInner" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.752941)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_yy6cx")
+texture = ExtResource("6_g2yg7")
 
 [node name="ShootDelay" type="Timer" parent="."]
 wait_time = 0.6
@@ -130,10 +131,24 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
+[node name="ScoreLabel" type="Label" parent="HUDLayer/HudRoot"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -105.0
+offset_right = 152.0
+offset_bottom = -40.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("8_svgew")
+theme_override_font_sizes/font_size = 48
+text = "000"
+
 [node name="Music" type="Node" parent="."]
 
 [node name="Bass" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("8_8njq0")
+stream = ExtResource("8_l6321")
 autoplay = true
 bus = &"Music"
 

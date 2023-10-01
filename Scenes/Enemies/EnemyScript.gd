@@ -3,11 +3,13 @@ class_name Enemy
 
 @export var explosion_scene: PackedScene
 @export var bullet_scene: PackedScene
-signal hit
+signal hit(kill: bool, score: int)
+
+var value: int = 3
 
 @export var hit_points: int = 3:
 	set(v):
-		hit.emit()
+		hit.emit(v == 0, value)
 		$HitSound.play()
 		hit_points = v
 		if hit_points == 0:

@@ -22,8 +22,8 @@ func _physics_process(delta):
 	velocity.x = lerp(velocity.x, 0.0, 0.05)
 	velocity.y = lerp(velocity.y, 0.0, 0.05)
 	
-	display_direction.z = lerp(display_direction.z, -(input_dir.x) * 30.0, 0.05)
-	display_direction.x = lerp(display_direction.x, (input_dir.y) * 30.0, 0.05)
+	display_direction.z = lerp(display_direction.z, -(input_dir.x) * 60.0, 0.05)
+	display_direction.x = lerp(display_direction.x, (input_dir.y) * 60.0, 0.05)
 	
 	position += Vector3(velocity.x, velocity.y, 0) * delta
 	position = position.clamp(Vector3(-range.x, -range.y, 0), Vector3(range.x, range.y, 0))

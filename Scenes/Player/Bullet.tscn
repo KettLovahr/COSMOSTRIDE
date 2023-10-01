@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3qumpf4va2p"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Bullet.gd" id="1_x4o28"]
-[ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Scenes/Player/Shoot.wav" id="2_e0x4r"]
+[ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Assets/Shoot.wav" id="2_46ge1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e1ka"]
 shading_mode = 0
@@ -30,7 +30,7 @@ mesh = SubResource("CapsuleMesh_fpqa3")
 autostart = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_e0x4r")
+stream = ExtResource("2_46ge1")
 autoplay = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
