@@ -13,7 +13,7 @@ signal hit(kill: bool, score: int)
 		if is_inside_tree():
 			$HitSound.play()
 		hit_points = v
-		if hit_points == 0:
+		if hit_points <= 0:
 			_on_kill()
 
 func _on_kill():

@@ -4,6 +4,7 @@ class_name Bullet
 const SPEED = 1.0
 
 var target: Vector3
+var damage: int = 1
 
 signal hit(kill: bool, score: int)
 
@@ -27,5 +28,5 @@ func _on_enemy_hit(kill: bool, score: int):
 func _on_body_entered(body):
 	if body is Enemy:
 		body.hit.connect(_on_enemy_hit)
-		body.hit_points -= 1
+		body.hit_points -= damage
 		queue_free()

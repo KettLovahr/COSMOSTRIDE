@@ -69,9 +69,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 	modules = [
-		{"type": "TWIN_FIRE", "level": 1},
-		{"type": "SHOT_SPEED", "level": 1},
-		{"type": "SHIELD", "level": 3},
+		{"type": "SHOT_SPEED", "level": 3},
+		{"type": "SHOT_SPEED", "level": 3},
+		{"type": "SHOT_SPEED", "level": 3},
 	]
 
 	_apply_module_effects()
@@ -113,6 +113,7 @@ func _shoot():
 	b.global_position = self.guns[current_gun].global_position
 	b.global_rotation = $PlayerController.global_rotation
 	b.hit.connect(_on_bullet_hit)
+	b.damage = gun_damage
 	can_shoot = false
 	$ShootDelay.start(gun_delay)
 	
@@ -169,6 +170,7 @@ func _apply_module_effects():
 					1: regen_timer /= 2.0
 					2: regen_timer /= 3.0
 					3: regen_timer /= 4.0
+				$RegenTimer.start(regen_timer)
 
 func _draw_module_sprites():
 	var cursor = 1
@@ -191,3 +193,9 @@ func _draw_module_sprites():
 				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_regen.png")
 		cursor += 1
 
+
+
+func _on_regen_timer_timeout():
+	if cur_health < max_health:
+		self.cur_health += 1
+	$RegenTimer.start(regen_timer)
