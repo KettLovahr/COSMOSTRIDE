@@ -52,4 +52,5 @@ light_energy = 5.0
 
 [node name="SpawnTimer" type="Timer" parent="."]
 
+[connection signal="death" from="Rails/FollowRail/PlayerRoot" to="." method="_on_player_root_death"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
