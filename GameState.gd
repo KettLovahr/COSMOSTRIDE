@@ -27,8 +27,8 @@ var module_descriptions: Dictionary = {
 	"SPEED": "Increases maneuverability, making it easier to dodge bullets",
 	"BARREL_ROLL": "Allows your ship to dodge bullets in-place",
 	"SHOT_SPEED": "Increases fire rate",
-	"SHOT_DAMAGE": "Increases bullet damage",
-	"TWIN_FIRE": "Allows your ship to fire from both guns simultaneously",
+	"SHOT_DAMAGE": "Increases bullet damage, but also increases delay between shots",
+	"TWIN_FIRE": "Allows your ship to fire from both guns simultaneously, does not stack",
 	"REGEN": "Allows your ship to automatically repair itself with time",
 }
 

@@ -27,7 +27,6 @@ _data = {
 script = ExtResource("1_g51sv")
 explosion_scene = ExtResource("2_55c21")
 bullet_scene = ExtResource("3_d56or")
-value = 10
 hit_points = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

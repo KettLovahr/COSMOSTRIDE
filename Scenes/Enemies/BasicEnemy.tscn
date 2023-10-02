@@ -52,6 +52,7 @@ _data = {
 script = ExtResource("1_cfng5")
 explosion_scene = ExtResource("2_ymt2p")
 bullet_scene = ExtResource("3_ja48k")
+value = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_wco26")

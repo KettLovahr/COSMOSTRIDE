@@ -334,4 +334,7 @@ grow_vertical = 2
 scale = Vector2(0.275, 0.275)
 texture = ExtResource("10_gmg81")
 
+[node name="Current" type="Sprite2D" parent="ColorRect"]
+scale = Vector2(0.3, 0.3)
+
 [connection signal="pressed" from="ColorRect/ContinueButton" to="." method="_on_continue_button_pressed"]
