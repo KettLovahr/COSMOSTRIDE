@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgr8vpbdpe0b0"]
+
+[ext_resource type="Theme" uid="uid://dl6ray4fvnlcu" path="res://Scenes/Theme.tres" id="1_jextb"]
+[ext_resource type="Script" path="res://Scenes/BetweenLevels/BetweenLevels.gd" id="2_ki1uk"]
+
+[node name="BetweenLevels" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jextb")
+script = ExtResource("2_ki1uk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LevelCompleteText" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.0
+offset_top = 40.0
+offset_right = 149.0
+offset_bottom = 74.0
+grow_horizontal = 2
+text = "Level %02d Complete!"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -79.0
+offset_right = 64.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Continue"
+
+[connection signal="pressed" from="ColorRect/ContinueButton" to="." method="_on_continue_button_pressed"]

@@ -6,6 +6,8 @@ class_name Enemy
 signal hit(kill: bool, score: int)
 
 @export var value: int = 3
+@export var gun_damage: int = 1
+@export var gun_damage_mult: int = 1
 
 @export var hit_points: int = 3:
 	set(v):
@@ -15,6 +17,9 @@ signal hit(kill: bool, score: int)
 		hit_points = v
 		if hit_points <= 0:
 			_on_kill()
+			
+func _ready():
+	gun_damage *= gun_damage_mult
 
 func _on_kill():
 	var ex: GPUParticles3D = explosion_scene.instantiate()
@@ -28,5 +33,6 @@ func _on_kill():
 func _on_timer_timeout():
 	$Timer.start(randf() * 0.5 + 0.2)
 	var b = bullet_scene.instantiate()
+	b.damage = gun_damage
 	add_child(b)
 	b.global_position = global_position

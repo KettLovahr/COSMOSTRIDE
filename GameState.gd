@@ -6,6 +6,16 @@ var level: int
 
 var main_menu: String = "res://Scenes/MainMenu/MainMenu.tscn"
 
+var module_icons: Dictionary = {
+	"SHIELD": "res://Scenes/Player/ModuleIcons/module_shield.png",
+	"SPEED": "res://Scenes/Player/ModuleIcons/module_speed.png",
+	"BARREL_ROLL": "res://Scenes/Player/ModuleIcons/module_barrel_roll.png",
+	"SHOT_SPEED": "res://Scenes/Player/ModuleIcons/module_shot_speed.png",
+	"SHOT_DAMAGE": "res://Scenes/Player/ModuleIcons/module_shot_damage.png",
+	"TWIN_FIRE": "res://Scenes/Player/ModuleIcons/module_twin_fire.png",
+	"REGEN": "res://Scenes/Player/ModuleIcons/module_regen.png",
+}
+
 func _ready():
 	restart()
 

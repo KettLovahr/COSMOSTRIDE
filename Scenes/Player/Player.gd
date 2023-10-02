@@ -43,7 +43,7 @@ var cur_health: int = 10:
 			$HUDLayer/HudRoot/DamageOverlay/DamageAnim.play("OnHit")
 			if v > 0:
 				$Music/Damage.play()
-		if v == 0:
+		if v <= 0 and alive:
 			_die()
 		cur_health = v
 
@@ -69,13 +69,12 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 	modules = [
-		{"type": "SHOT_SPEED", "level": 3},
-		{"type": "SHOT_SPEED", "level": 3},
-		{"type": "SHOT_SPEED", "level": 3},
+
 	]
 
 	_apply_module_effects()
 	_draw_module_sprites()
+	_update_score()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -96,7 +95,7 @@ func _process(delta):
 
 func _on_bullet_hit(kill, score):
 	if kill:
-		self.score += score
+		self.score += score * GameState.level
 
 func _on_shoot_delay_timeout():
 	can_shoot = true
@@ -138,7 +137,7 @@ func _apply_module_effects():
 				self.max_health += module.level * 3
 				self.cur_health += module.level * 3
 			"SPEED":
-				$PlayerController.speed += module.level
+				$PlayerController.speed += module.level * 3
 			"BARREL_ROLL":
 				barrel_roll = true
 				match module.level:
@@ -176,21 +175,7 @@ func _draw_module_sprites():
 	var cursor = 1
 	for module in modules:
 		var sprite: Sprite2D = get_node("HUDLayer/HudRoot/ModuleDisplay/Icon%d" % cursor)
-		match module.type:
-			"SHIELD":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_shield.png")
-			"SPEED":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_speed.png")
-			"BARREL_ROLL":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_barrel_roll.png")
-			"SHOT_SPEED":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_shot_speed.png")
-			"SHOT_DAMAGE":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_shot_damage.png")
-			"TWIN_FIRE":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_twin_fire.png")
-			"REGEN":
-				sprite.texture = load("res://Scenes/Player/ModuleIcons/module_regen.png")
+		sprite.texture = load(GameState.module_icons[module.type])
 		cursor += 1
 
 

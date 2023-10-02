@@ -8,6 +8,8 @@ var player: Area3D
 var origin: Vector3
 var travel_delta: float = 0.0
 
+var damage: int = 1
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,6 +31,6 @@ func _on_timer_timeout():
 
 func _on_area_entered(area):
 	if "Player" in area.get_groups():
-		area.get_parent().cur_health -= 1
+		area.get_parent().cur_health -= damage
 		queue_free()
 
