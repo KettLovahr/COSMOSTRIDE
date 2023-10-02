@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Game"
+config/name="COSMOSTRIDE"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="res://icon.png"
 
 [autoload]
 
