@@ -1,15 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgr8vpbdpe0b0"]
+[gd_scene load_steps=5 format=3 uid="uid://cgr8vpbdpe0b0"]
 
 [ext_resource type="Theme" uid="uid://dl6ray4fvnlcu" path="res://Scenes/Theme.tres" id="1_jextb"]
 [ext_resource type="Script" path="res://Scenes/BetweenLevels/BetweenLevels.gd" id="2_ki1uk"]
-[ext_resource type="Texture2D" uid="uid://duq7yrtkh3rxl" path="res://Scenes/Player/ModuleIcons/module_barrel_roll.png" id="3_nbcmp"]
-[ext_resource type="Texture2D" uid="uid://cfshuojxxsy08" path="res://Scenes/Player/ModuleIcons/module_shield.png" id="4_c1y2c"]
-[ext_resource type="Texture2D" uid="uid://bxuf32bwv8pw1" path="res://Scenes/Player/ModuleIcons/module_shot_speed.png" id="5_3m7d7"]
-[ext_resource type="Texture2D" uid="uid://da6rwdfns4vx" path="res://Scenes/Player/ModuleIcons/module_speed.png" id="6_2w71i"]
-[ext_resource type="Texture2D" uid="uid://c1sk7f165n4dc" path="res://Scenes/Player/ModuleIcons/module_twin_fire.png" id="7_whh2v"]
-[ext_resource type="Texture2D" uid="uid://tortkmn2j41o" path="res://Scenes/Player/ModuleIcons/module_regen.png" id="8_t6ck4"]
-[ext_resource type="Texture2D" uid="uid://do1sandi5gue7" path="res://Scenes/Player/ModuleIcons/module_shot_damage.png" id="9_mo7qx"]
-[ext_resource type="Texture2D" uid="uid://b16e7wqkj4lry" path="res://Scenes/Player/ModuleIcons/module_empty.png" id="10_gmg81"]
+[ext_resource type="PackedScene" uid="uid://b8xewhquessmg" path="res://Scenes/BetweenLevels/Choice.tscn" id="3_bddu0"]
+[ext_resource type="PackedScene" uid="uid://ctem3akj55k2n" path="res://Scenes/BetweenLevels/Equipped.tscn" id="4_w45vc"]
 
 [node name="BetweenLevels" type="Control"]
 layout_mode = 3
@@ -85,145 +79,28 @@ offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Choice1" type="Button" parent="ColorRect/Choices"]
+[node name="Choice1" parent="ColorRect/Choices" instance=ExtResource("3_bddu0")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -40.0
-offset_right = -120.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Anchor" type="Control" parent="ColorRect/Choices/Choice1"]
+[node name="Choice2" parent="ColorRect/Choices" instance=ExtResource("3_bddu0")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Choices/Choice1/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("3_nbcmp")
-
-[node name="Choice2" type="Button" parent="ColorRect/Choices"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -120.0
-offset_top = -40.0
 offset_right = -40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Anchor" type="Control" parent="ColorRect/Choices/Choice2"]
+[node name="Choice3" parent="ColorRect/Choices" instance=ExtResource("3_bddu0")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Choices/Choice2/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("4_c1y2c")
-
-[node name="Choice3" type="Button" parent="ColorRect/Choices"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -40.0
-offset_top = -40.0
 offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Anchor" type="Control" parent="ColorRect/Choices/Choice3"]
+[node name="Choice4" parent="ColorRect/Choices" instance=ExtResource("3_bddu0")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Choices/Choice3/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("5_3m7d7")
-
-[node name="Choice4" type="Button" parent="ColorRect/Choices"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = 40.0
-offset_top = -40.0
 offset_right = 120.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Anchor" type="Control" parent="ColorRect/Choices/Choice4"]
+[node name="Choice5" parent="ColorRect/Choices" instance=ExtResource("3_bddu0")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Choices/Choice4/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("6_2w71i")
-
-[node name="Choice5" type="Button" parent="ColorRect/Choices"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = 120.0
-offset_top = -40.0
 offset_right = 200.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Anchor" type="Control" parent="ColorRect/Choices/Choice5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Choices/Choice5/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("7_whh2v")
 
 [node name="ChooseModule" type="Label" parent="ColorRect/Choices"]
 layout_mode = 1
@@ -263,89 +140,18 @@ grow_horizontal = 2
 text = "Equipped Modules"
 horizontal_alignment = 1
 
-[node name="Equipped1" type="Button" parent="ColorRect/Equipped"]
+[node name="Equipped1" parent="ColorRect/Equipped" instance=ExtResource("4_w45vc")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -40.0
-offset_right = -80.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Anchor" type="Control" parent="ColorRect/Equipped/Equipped1"]
+[node name="Equipped2" parent="ColorRect/Equipped" instance=ExtResource("4_w45vc")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Equipped/Equipped1/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("8_t6ck4")
-
-[node name="Equipped2" type="Button" parent="ColorRect/Equipped"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -40.0
-offset_top = -40.0
 offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Anchor" type="Control" parent="ColorRect/Equipped/Equipped2"]
+[node name="Equipped3" parent="ColorRect/Equipped" instance=ExtResource("4_w45vc")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Equipped/Equipped2/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("9_mo7qx")
-
-[node name="Equipped3" type="Button" parent="ColorRect/Equipped"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = 80.0
-offset_top = -40.0
 offset_right = 160.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Anchor" type="Control" parent="ColorRect/Equipped/Equipped3"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Equipped/Equipped3/Anchor"]
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("10_gmg81")
 
 [node name="Current" type="Sprite2D" parent="ColorRect"]
 scale = Vector2(0.3, 0.3)

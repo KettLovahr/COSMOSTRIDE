@@ -61,10 +61,12 @@ func _show_equipped_modules():
 		var level = GameState.equipped_modules[i].level
 		
 		var button = get_node("ColorRect/Equipped/Equipped%d" % [i + 1])
+		var lvl_lbl = get_node("ColorRect/Equipped/Equipped%d/Anchor/Label" % [i + 1])
 		var sprite = get_node("ColorRect/Equipped/Equipped%d/Anchor/Sprite2D" % [i + 1])
 		
 		sprite.texture = load(module_icon)
 		button.tooltip_text = "%s\nLevel %d" % [tooltip, level]
+		lvl_lbl.text = "%s" % [level if level > 0 else ""]
 		for connection in button.pressed.get_connections():
 			button.pressed.disconnect(connection.callable)
 		button.pressed.connect(
@@ -84,10 +86,12 @@ func _show_available_modules():
 		var level = current_choices[i].level
 		
 		var sprite = get_node("ColorRect/Choices/Choice%d/Anchor/Sprite2D" % [i + 1])
+		var lvl_lbl = get_node("ColorRect/Choices/Choice%d/Anchor/Label" % [i + 1])
 		var button = get_node("ColorRect/Choices/Choice%d" % [i + 1])
 
 		sprite.texture = load(module_icon)
 		button.tooltip_text = "%s\nLevel %d" % [tooltip, level]
+		lvl_lbl.text = "%s" % [level if level > 0 else ""]
 		for connection in button.pressed.get_connections():
 			button.pressed.disconnect(connection.callable)
 		button.pressed.connect(
