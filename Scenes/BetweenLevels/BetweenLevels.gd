@@ -1,7 +1,6 @@
 extends Control
 
 var module_choices: Array[Dictionary] = [
-
 		{"type": "SHIELD", "level": 1},
 		{"type": "SPEED", "level": 1},
 		{"type": "SHOT_SPEED", "level": 1},
@@ -72,10 +71,8 @@ func _show_equipped_modules():
 			func():
 				if chosen_module != { } and chosen_module.type != "EMPTY":
 					GameState.equipped_modules[i] = chosen_module
-					print(GameState.equipped_modules)
 					chosen_module = { }
 					$ColorRect/Current.texture = null
-				print(chosen_module)
 				_show_equipped_modules()
 		)
 
@@ -98,7 +95,6 @@ func _show_available_modules():
 				if chosen_module == { } or chosen_module.type == "EMPTY":
 					chosen_module = current_choices[i]
 					current_choices[i] = { "type": "EMPTY", "level": 0 }
-					print(chosen_module)
 					$ColorRect/Current.texture = load(module_icon)
 				elif current_choices[i] == { } or current_choices[i].type == "EMPTY":
 					current_choices[i] = chosen_module

@@ -5,18 +5,22 @@ class_name Enemy
 @export var bullet_scene: PackedScene
 signal hit(kill: bool, score: int)
 
+var alive: bool = true
+
 @export var value: int = 3
 @export var gun_damage: int = 1
 @export var gun_damage_mult: int = 1
 
 @export var hit_points: int = 3:
 	set(v):
-		hit.emit(v <= 0, value)
-		if is_inside_tree():
-			$HitSound.play()
-		hit_points = v
-		if hit_points <= 0:
-			_on_kill()
+		if alive:
+			hit.emit(v <= 0 and alive, value)
+			if is_inside_tree():
+				$HitSound.play()
+			hit_points = v
+			if hit_points <= 0:
+				alive = false
+				_on_kill()
 			
 func _ready():
 	gun_damage *= gun_damage_mult

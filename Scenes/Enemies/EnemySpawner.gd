@@ -20,9 +20,19 @@ var level_data: Array[Dictionary] = [
 		"damage_multiplier": 1,
 	},
 	{
-		"spawn_timer": 2.5,
+		"spawn_timer": 4.0,
 		"enemies": ["res://Scenes/Enemies/Armored.tscn"],
 		"damage_multiplier": 1,
+	},
+	{
+		"spawn_timer": 2.5,
+		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
+		"damage_multiplier": 2,
+	},
+	{
+		"spawn_timer": 2.0,
+		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
+		"damage_multiplier": 2,
 	},
 	{
 		"spawn_timer": 2.0,
@@ -32,10 +42,10 @@ var level_data: Array[Dictionary] = [
 	{
 		"spawn_timer": 1.5,
 		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
-		"damage_multiplier": 2,
+		"damage_multiplier": 3,
 	},
 	{
-		"spawn_timer": 1.0,
+		"spawn_timer": 1.5,
 		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
 		"damage_multiplier": 3,
 	},
@@ -50,19 +60,19 @@ var level_data: Array[Dictionary] = [
 		"damage_multiplier": 4,
 	},
 	{
+		"spawn_timer": 0.65,
+		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
+		"damage_multiplier": 4,
+	},
+	{
 		"spawn_timer": 0.5,
 		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
+		"damage_multiplier": 4,
+	},
+	{
+		"spawn_timer": 0.35,
+		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
 		"damage_multiplier": 5,
-	},
-	{
-		"spawn_timer": 0.25,
-		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
-		"damage_multiplier": 6,
-	},
-	{
-		"spawn_timer": 0.15,
-		"enemies": ["res://Scenes/Enemies/BasicEnemy.tscn", "res://Scenes/Enemies/Armored.tscn"],
-		"damage_multiplier": 6,
 	},
 ]
 

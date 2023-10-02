@@ -88,7 +88,7 @@ func _process(delta):
 		if Input.is_action_pressed("move_shoot") and can_shoot:
 			_shoot()
 			if twin_fire:
-				_shoot()
+				get_tree().create_timer(0.02).timeout.connect(func(): _shoot())
 		
 
 func _on_bullet_hit(kill, score):
