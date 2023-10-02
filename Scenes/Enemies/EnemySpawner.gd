@@ -6,6 +6,8 @@ var enemies: Array[PackedScene]
 var damage_mult: int = 1
 var spawn_timer: float = 3.0
 
+var spawn: bool = true
+
 var level_data: Array[Dictionary] = [
 	{
 		"spawn_timer": 3.0,
@@ -72,8 +74,9 @@ func _ready():
 
 
 func _on_spawn_timer_timeout():
-	spawn_enemy()
-	$SpawnTimer.start(spawn_timer)
+	if spawn:
+		spawn_enemy()
+		$SpawnTimer.start(spawn_timer)
 
 func spawn_enemy():
 	var which_pattern = randi_range(0, len(patterns) - 1)

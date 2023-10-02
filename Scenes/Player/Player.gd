@@ -68,9 +68,7 @@ func _ready():
 	]
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
-	modules = [
-
-	]
+	modules = GameState.equipped_modules
 
 	_apply_module_effects()
 	_draw_module_sprites()
@@ -152,13 +150,13 @@ func _apply_module_effects():
 			"SHOT_DAMAGE":
 				match module.level:
 					1: 
-						gun_delay += 0.01
+						gun_delay += 0.05
 						gun_damage += 1
 					2: 
-						gun_delay += 0.02
+						gun_delay += 0.10
 						gun_damage += 2
 					3: 
-						gun_delay += 0.03
+						gun_delay += 0.20
 						gun_damage += 4
 					
 			"TWIN_FIRE":

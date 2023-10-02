@@ -11,7 +11,7 @@ signal hit(kill: bool, score: int)
 
 @export var hit_points: int = 3:
 	set(v):
-		hit.emit(v == 0, value)
+		hit.emit(v <= 0, value)
 		if is_inside_tree():
 			$HitSound.play()
 		hit_points = v

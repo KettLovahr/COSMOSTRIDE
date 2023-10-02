@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=33 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3qumpf4va2p" path="res://Scenes/Player/Bullet.tscn" id="2_uv341"]
 [ext_resource type="Shader" path="res://Scenes/Player/RocketFire.gdshader" id="3_h0uvm"]
 [ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Assets/reticle.png" id="6_g2yg7"]
+[ext_resource type="Theme" uid="uid://dl6ray4fvnlcu" path="res://Scenes/Theme.tres" id="7_3ojys"]
 [ext_resource type="Script" path="res://Scenes/Player/HudRoot.gd" id="7_lvghx"]
 [ext_resource type="AudioStream" uid="uid://bm2lllnr8m680" path="res://Assets/loop.wav" id="8_l6321"]
 [ext_resource type="FontFile" uid="uid://cjlgevbwecirh" path="res://Assets/Audiowide-Regular.ttf" id="8_svgew"]
@@ -344,6 +345,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_3ojys")
 script = ExtResource("7_lvghx")
 
 [node name="DamageOverlay" type="ColorRect" parent="HUDLayer/HudRoot"]
