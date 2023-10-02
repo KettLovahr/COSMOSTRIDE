@@ -1,10 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://54blxns7gun0"]
+[gd_scene load_steps=34 format=3 uid="uid://54blxns7gun0"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_1syx5"]
 [ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="1_5jc7j"]
 [ext_resource type="Script" path="res://Scenes/Player/PlayerController.gd" id="1_8go8n"]
 [ext_resource type="PackedScene" uid="uid://d3qumpf4va2p" path="res://Scenes/Player/Bullet.tscn" id="2_uv341"]
 [ext_resource type="Shader" path="res://Scenes/Player/RocketFire.gdshader" id="3_h0uvm"]
+[ext_resource type="PackedScene" uid="uid://dgjt2y2yeumff" path="res://Scenes/MainScene/ShaderLoader.tscn" id="6_0eib4"]
 [ext_resource type="Texture2D" uid="uid://dx4hmcjynaife" path="res://Assets/reticle.png" id="6_g2yg7"]
 [ext_resource type="Theme" uid="uid://dl6ray4fvnlcu" path="res://Scenes/Theme.tres" id="7_3ojys"]
 [ext_resource type="Script" path="res://Scenes/Player/HudRoot.gd" id="7_lvghx"]
@@ -319,6 +320,9 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 current = true
 fov = 65.0
+
+[node name="Node3D" parent="PlayerCamera" instance=ExtResource("6_0eib4")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, -0.857364)
 
 [node name="ReticleOuter" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)

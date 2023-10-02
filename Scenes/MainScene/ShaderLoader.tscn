@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://dgjt2y2yeumff"]
+
+[ext_resource type="Script" path="res://Scenes/MainScene/ShaderLoader.gd" id="1_hyya3"]
+[ext_resource type="PackedScene" uid="uid://dlqoiphdauqm2" path="res://Scenes/Enemies/EnemyBulletMesh.tscn" id="1_jj1m8"]
+[ext_resource type="PackedScene" uid="uid://cant2j2poomua" path="res://Scenes/Player/BulletMesh.tscn" id="2_ex28d"]
+[ext_resource type="PackedScene" uid="uid://dr0sx7dwfnqy0" path="res://Scenes/Player/PlayerModel.glb" id="3_5esdx"]
+[ext_resource type="PackedScene" uid="uid://de5ssroly4eay" path="res://Assets/Enemy.glb" id="4_y12am"]
+[ext_resource type="PackedScene" uid="uid://2f6mq226sss6" path="res://Assets/Armored.glb" id="5_q7jf6"]
+
+[sub_resource type="Curve" id="Curve_1h4f8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.621053, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.24211, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m5hxy"]
+curve = SubResource("Curve_1h4f8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8bc3h"]
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.7
+initial_velocity_max = 3.0
+angle_min = -145.6
+angle_max = 97.1
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_m5hxy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msiel"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.662745, 0.584314, 0.0784314, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_e08jc"]
+material = SubResource("StandardMaterial3D_msiel")
+
+[node name="ShaderLoader" type="Node3D"]
+script = ExtResource("1_hyya3")
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("1_jj1m8")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 0, -3)
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" parent="." instance=ExtResource("2_ex28d")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -3)
+skeleton = NodePath("../../..")
+
+[node name="PlayerModel" parent="." instance=ExtResource("3_5esdx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54359, -0.470518, -13.5041)
+
+[node name="Enemy" parent="." instance=ExtResource("4_y12am")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61483, 0, -11.155)
+
+[node name="Armored" parent="." instance=ExtResource("5_q7jf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26815, 0, -17.0484)
+
+[node name="Node3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_8bc3h")
+draw_pass_1 = SubResource("QuadMesh_e08jc")

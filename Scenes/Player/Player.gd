@@ -116,6 +116,7 @@ func _shoot():
 	
 func _die():
 	alive = false
+	death.emit()
 	$PlayerController.alive = false
 	can_shoot = false
 	$PlayerController/ModelPosition/DeathAnim.play("OnDeath")

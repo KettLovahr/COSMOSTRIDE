@@ -1,18 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3qumpf4va2p"]
+[gd_scene load_steps=5 format=3 uid="uid://d3qumpf4va2p"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Bullet.gd" id="1_x4o28"]
 [ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Assets/Shoot.wav" id="2_46ge1"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e1ka"]
-shading_mode = 0
-albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fpqa3"]
-material = SubResource("StandardMaterial3D_3e1ka")
-radius = 0.05
-height = 0.5
-radial_segments = 4
-rings = 1
+[ext_resource type="PackedScene" uid="uid://cant2j2poomua" path="res://Scenes/Player/BulletMesh.tscn" id="2_m31d1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_120ja"]
 radius = 0.248965
@@ -22,9 +12,7 @@ height = 1.16289
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_x4o28")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_fpqa3")
+[node name="MeshInstance3D" parent="." instance=ExtResource("2_m31d1")]
 
 [node name="DespawnTimer" type="Timer" parent="."]
 autostart = true

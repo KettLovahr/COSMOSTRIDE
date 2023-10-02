@@ -1,16 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmxdhaqmhqmhy"]
+[gd_scene load_steps=5 format=3 uid="uid://cmxdhaqmhqmhy"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyBullet.gd" id="1_1or11"]
+[ext_resource type="PackedScene" uid="uid://dlqoiphdauqm2" path="res://Scenes/Enemies/EnemyBulletMesh.tscn" id="2_4weig"]
 [ext_resource type="AudioStream" uid="uid://vrvc4w67fnqg" path="res://Assets/Shoot.wav" id="2_n00l0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umglj"]
-shading_mode = 0
-albedo_color = Color(1, 0.105882, 0.243137, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_xk8qh"]
-material = SubResource("StandardMaterial3D_umglj")
-radius = 0.1
-height = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_74cse"]
 radius = 0.2
@@ -20,9 +12,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 collision_mask = 32768
 script = ExtResource("1_1or11")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("SphereMesh_xk8qh")
+[node name="MeshInstance3D" parent="." instance=ExtResource("2_4weig")]
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 3.0

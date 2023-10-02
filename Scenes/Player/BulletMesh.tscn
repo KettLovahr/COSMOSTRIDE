@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cant2j2poomua"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e1ka"]
+shading_mode = 0
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fpqa3"]
+material = SubResource("StandardMaterial3D_3e1ka")
+radius = 0.05
+height = 0.5
+radial_segments = 4
+rings = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_fpqa3")
