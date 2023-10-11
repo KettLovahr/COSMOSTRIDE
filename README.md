@@ -21,4 +21,10 @@ There is also a post-jam version, not published to this repository, that feature
 
 ## Info
 
-This game was developed with the [Godot Engine](https://godotengine.org/)
+This game was developed with the [Godot Engine](https://godotengine.org/), using GDScript, with a 72 hour time limit.
+
+Assets were made in several pieces of software
+ - Space background drawn in [Krita](https://krita.org/en/)
+ - Badge icons drawn in [Inkscape](https://inkscape.org/)
+ - Spaceship and enemy models made in [Blender](https://www.blender.org/)
+ - Music and SFX made in [SunVox](https://warmplace.ru/soft/sunvox/)
